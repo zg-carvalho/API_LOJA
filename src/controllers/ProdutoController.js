@@ -12,6 +12,7 @@ class ProdutoController{
 
       return res.json(produto)
     }catch (e) {
+      console.log('deu ruim aqui ', e)
       return res.status(400).json({
         errors: e.errors.map((err) => err.message)
       })
