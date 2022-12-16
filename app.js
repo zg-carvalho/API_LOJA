@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import './src/database'
 import express from "express"
-
+import cors from "cors"
 import homeRoutes from "./src/routes/homeRoutes"
 import produtoRoutes from "./src/routes/produtoRoutes"
 import fotoRoutes from "./src/routes/fotoRoutes"
@@ -15,14 +15,30 @@ class App {
   }
 
   middlewares() {
-    this.app.use(express.urlencoded({ extended:true }))
+    this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json())
   }
 
   routes() {
-     this.app.use("/", homeRoutes)
-     this.app.use("/produtos/", produtoRoutes)
-     this.app.use("/fotos/", fotoRoutes)
+    const lista_rotas = [
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ]
+    const corsOptions = {
+      origin(origin, callback) {
+        if (lista_rotas.indexOf(origin) !== -1 || !origin) {
+          callback(null, true)
+        }
+        else {
+          callback(new Error("Bloqueado pelo Cors"))
+        }
+      }
+    }
+    this.app.use(cors(corsOptions))
+    this.app.use("/", homeRoutes)
+    this.app.use("/produtos/", produtoRoutes)
+    this.app.use("/fotos/", fotoRoutes)
+
   }
 }
 export default new App().app

@@ -1,8 +1,16 @@
 import Produto from "../models/Produto"
+import Foto from "../models/Foto"
 
 class ProdutoController{
   async index(req, res) {
-    const produtos = await Produto.findAll()
+    const produtos = await Produto.findAll({
+      attributes:["id","nome","marca","quantidade","custo","preco"],
+      include: {
+        model: Foto,
+        attributes: ["originalname"]
+      }
+
+    })
     res.json(produtos)
   }
 
@@ -12,7 +20,6 @@ class ProdutoController{
 
       return res.json(produto)
     }catch (e) {
-      console.log('deu ruim aqui ', e)
       return res.status(400).json({
         errors: e.errors.map((err) => err.message)
       })
@@ -25,15 +32,21 @@ class ProdutoController{
 
       if(!id) {
         return res.status(400).json({
-          erros: ["Faltando ID"],
+          errors: ["Faltando ID"],
         });
       }
 
-      const produto = await Produto.findByPk(id)
+      const produto = await Produto.findByPk(id, {
+        attributes:["id","nome","marca","quantidade","custo","preco"],
+        include: {
+          model: Foto,
+          attributes: ["originalname"]
+        },
+      });
 
       if(!produto) {
         return res.status(400).json({
-          erros: ["Produto não existe"],
+          errors: ["Produto não existe"],
         });
       }
 
