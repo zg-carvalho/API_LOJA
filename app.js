@@ -6,6 +6,7 @@ import cors from "cors"
 import homeRoutes from "./src/routes/homeRoutes"
 import produtoRoutes from "./src/routes/produtoRoutes"
 import fotoRoutes from "./src/routes/fotoRoutes"
+import {resolve} from "path"
 
 class App {
   constructor() {
@@ -17,6 +18,7 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json())
+    this.app.use(express.static(resolve(__dirname,"uploads")))
   }
 
   routes() {

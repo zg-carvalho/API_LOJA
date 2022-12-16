@@ -7,7 +7,7 @@ class ProdutoController{
       attributes:["id","nome","marca","quantidade","custo","preco"],
       include: {
         model: Foto,
-        attributes: ["originalname"]
+        attributes: ["url","filename"]
       }
 
     })
@@ -40,7 +40,7 @@ class ProdutoController{
         attributes:["id","nome","marca","quantidade","custo","preco"],
         include: {
           model: Foto,
-          attributes: ["originalname"]
+          attributes: ["url","filename"]
         },
       });
 
