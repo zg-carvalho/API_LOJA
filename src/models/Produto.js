@@ -24,6 +24,17 @@ export default class Produto extends Model {
         },
       },
 
+      descricao: {
+        type: Sequelize.STRING,
+        defaultValue: "",
+        validate: {
+          len: {
+            args: [2, 255],
+            msg: "Marca precisa ter entre 3 e 255 caracteres",
+          },
+        },
+      },
+
       quantidade: {
         type: Sequelize.INTEGER,
         defaultValue: "",

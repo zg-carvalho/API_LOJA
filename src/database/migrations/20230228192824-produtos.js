@@ -19,6 +19,11 @@ module.exports = {
         allowNull: false,
       },
 
+      descricao: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
       quantidade: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -53,4 +58,3 @@ module.exports = {
 
   }
 };
-

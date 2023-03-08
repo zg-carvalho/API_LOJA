@@ -5,6 +5,7 @@ import express from "express"
 import cors from "cors"
 import homeRoutes from "./src/routes/homeRoutes"
 import produtoRoutes from "./src/routes/produtoRoutes"
+import pedidoRoutes from "./src/routes/pedidoRoutes"
 import fotoRoutes from "./src/routes/fotoRoutes"
 import {resolve} from "path"
 
@@ -39,6 +40,7 @@ class App {
     this.app.use(cors(corsOptions))
     this.app.use("/", homeRoutes)
     this.app.use("/produtos/", produtoRoutes)
+    this.app.use("/pedido/", pedidoRoutes)
     this.app.use("/fotos/", fotoRoutes)
 
   }

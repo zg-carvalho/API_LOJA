@@ -4,7 +4,7 @@ import Foto from "../models/Foto"
 class ProdutoController{
   async index(req, res) {
     const produtos = await Produto.findAll({
-      attributes:["id","nome","marca","quantidade","custo","preco"],
+      attributes:["id","nome","marca","descricao","quantidade","custo","preco"],
       include: {
         model: Foto,
         attributes: ["url","filename"]
@@ -37,7 +37,7 @@ class ProdutoController{
       }
 
       const produto = await Produto.findByPk(id, {
-        attributes:["id","nome","marca","quantidade","custo","preco"],
+        attributes:["id","nome","marca","descricao","quantidade","custo","preco"],
         include: {
           model: Foto,
           attributes: ["url","filename"]
